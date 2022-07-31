@@ -1,4 +1,5 @@
 from crypt import methods
+from glob import escape
 from flask import Flask,url_for
 from requests import request
 
@@ -29,7 +30,7 @@ def submitSomething():
         return "You have sent some post request"
     if(request.method=="GET"):
         return "You have sent some GET request"
-        
+
 #Same as the preceding example we are going to handle request with magic trigers
 
 @app.get("/routesWithShortcutDeco")
@@ -39,3 +40,7 @@ def submittedGetReq():
 @app.post("/routesWithShortcutDeco")
 def submittedPostReq():
     return "You have sent some post request"
+
+@app.route("/hello/<path:name>/") #here path is the type converter and there is string,int,path,float and uuid
+def helloBwan(name):
+    return f'<h2>Hello Dear {escape(name)}</h2>' #f help us print template litteral and escape prevent injection but remember in all template, JINJA,the template engine already do it for us
