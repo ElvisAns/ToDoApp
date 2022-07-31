@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -19,3 +19,24 @@ class todo(db.Model):
     date = db.Column(db.DateTime,nullable=False)
     def __repr__(self): #will handle printing more especially in debugging
         return f'<Person : {self.title} , {self.description}> is it completed yet? {self.completed}'
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/get_tasks/")
+def get_to_do():
+    pass
+
+@app.route("/save_to_do/")
+def save_to_do():
+    pass
+
+@app.route("/delete_task/")
+def delete_to_do():
+    pass
+
+@app.route("/make_complete/")
+def make_to_do_complete():
+    pass
