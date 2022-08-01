@@ -30,3 +30,18 @@ function saveToDo(e){
 }
 
 document.getElementById("formSave").addEventListener("submit",saveToDo)
+
+function deleteItem(itemID){
+    fetch(`/delete_task/${itemID}`).then(resp=>resp.json())
+    .then(jsonResponse=>{
+        if(jsonResponse.status=="ok"){
+            alert(`La tache a ete supprime avec success`)
+            window.location.assign("/")
+        }
+        else
+            throw "error"
+    })
+    .catch(function(){
+        alert("Une erreur s'est produite lors de la suppression")
+    })
+}
