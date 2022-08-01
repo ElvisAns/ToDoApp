@@ -36,7 +36,7 @@
                         </div>
           
                         <div class="col-12">
-                          <button type="submit" class="btn btn-warning">Refresh tasks</button>
+                          <button type="submit" class="btn btn-warning">Refresh list</button>
                         </div>
                       </form>
           
@@ -51,18 +51,24 @@
                           </tr>
                         </thead>
                         <tbody>
+                        {% if data is defined and data|length %}
+                        {% for item in data%}
                           <tr>
-                            <th scope="row">{{id}}</th>
-                            <td><h6 class="text-primary">{{title}}</h6><p>{{description}}</p></td>
-                            <td>{{completed}}</td>
-                            <td>{{datetime}}</td>
+                            <th scope="row">{{ item.id }}</th>
+                            <td><h6 class="text-primary">{{ item.title }}</h6><p>{{ item.description }}</p></td>
+                            <td>{{ item.completed }}</td>
+                            <td>{{ item.date }}</td>
                             <td>
                                 <div class="row row-cols-lg-auto justify-content-center align-items-start">
-                                    <button onclick="delete({{id}})" type="submit" class="btn btn-danger m-1">Delete</button>
-                                    <button onclick="makeAsDone({{id}})" type="submit" class="btn btn-success m-1">Finished</button>
+                                    <button onclick="deleteItem({{ item.id }})" type="submit" class="btn btn-danger m-1">Delete</button>
+                                    <button onclick="makeAsDone({{ item.id }})" type="submit" class="btn btn-success m-1">Finished</button>
                                 </div>
                             </td>
                           </tr>
+                        {% endfor %}
+                        {% else %}
+                          <tr><td colspan="5"><p class="text-center py-2">You have not yet saved any note before</p></td></tr>
+                        {% endif %}
                         </tbody>
                       </table>
           
