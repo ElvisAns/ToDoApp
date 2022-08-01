@@ -1,6 +1,7 @@
 from datetime import datetime
+import sys
 from flask_bootstrap import Bootstrap5
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, url_for,abort,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from crypt import methods
@@ -46,11 +47,28 @@ def index():
 
 @app.route("/get_tasks/")
 def get_to_do():
-    return "hello"
+    pass
 
 @app.route("/save_to_do/", methods=['POST'])
 def save_to_do():
-    return "hello"
+    error = False
+    body = {}
+    try:
+        datas = request.form.get_json()
+        new_items = todo(title=datas['title'],description=datas['description'],date=now.strftime("%d/%m/%Y %H:%M:%S"))
+        db.session.add(new_items)
+        db.session.commit()
+        body['description'] = todo.description
+    except:
+        error = True
+        db.session.rollback()
+        print(sys.exc_info())
+    finally:
+        db.session.close()
+    if error:
+        abort (400)
+    else:
+        return jsonify(body)
 
 @app.route("/delete_task/<int:id>/")
 def delete_to_do(id):
