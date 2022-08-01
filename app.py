@@ -23,7 +23,7 @@ class todo(db.Model):
     completed = db.Column(db.Boolean,default=False)
     date = db.Column(db.DateTime,nullable=False)
     def __repr__(self): #will handle printing more especially in debugging
-        return f'<Person : {self.title} , {self.description}> is it completed yet? {self.completed}'
+       return f'<Person : {self.title} , {self.description}> is it completed yet? {self.completed}'
 
 now = datetime.now()
 try:
@@ -54,11 +54,15 @@ def save_to_do():
     error = False
     body = {}
     try:
-        datas = request.form.get_json()
-        new_items = todo(title=datas['title'],description=datas['description'],date=now.strftime("%d/%m/%Y %H:%M:%S"))
-        db.session.add(new_items)
+        datas = request.json
+        d = now.strftime("%d/%m/%Y %H:%M:%S")
+        new_item = todo(title=datas['title'],description=datas['description'],date=d)
+        db.session.add(new_item)
         db.session.commit()
-        body['description'] = todo.description
+        body['title'] = datas['title']
+        body['description'] = datas['description']
+        body['date'] = d
+        body['completed'] = False
     except:
         error = True
         db.session.rollback()
@@ -66,7 +70,8 @@ def save_to_do():
     finally:
         db.session.close()
     if error:
-        abort (400)
+        db.session.rollback()
+        print(sys.exc_info())
     else:
         return jsonify(body)
 
