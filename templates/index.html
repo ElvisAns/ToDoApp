@@ -17,16 +17,16 @@
           
                       <h4 class="text-center my-3 pb-3">My ToDO list</h4>
           
-                      <form class="row row-cols-lg-auto g-3 justify-content-center align-items-start mb-4 pb-2">
+                      <form id="formSave" class="row row-cols-lg-auto g-3 justify-content-center align-items-start mb-4 pb-2">
                         <div class="col-12">
                           <div class="form-outline">
-                            <input type="text" id="form1" class="form-control" />
+                            <input type="text" autocomplete="false" name="title" class="form-control" />
                             <label class="form-label" for="form1">Enter a task  title here</label>
                           </div>
                         </div>
                         <div class="col-12">
                             <div class="form-outline">
-                              <input type="text" id="form1" class="form-control" />
+                              <input type="text" autocomplete="false" name="description" class="form-control" />
                               <label class="form-label" for="form1">Enter a task description</label>
                             </div>
                           </div>
@@ -85,5 +85,6 @@
             </div>
           </section>
     {{ bootstrap.load_js() }}
+    <script src="../static/script.js"></script>
     </body>
 </html>
