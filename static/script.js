@@ -21,6 +21,7 @@ function saveToDo(e){
     })
     .then(response => response.json())
     .then(jsonResponse => {
+        window.location.assign("/")
     })
     .catch(function(){
         alert("Une erreur s'est produite lors de l'enregistrement")
