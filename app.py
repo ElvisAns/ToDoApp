@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_bootstrap import Bootstrap5
 from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -22,10 +23,22 @@ class todo(db.Model):
     def __repr__(self): #will handle printing more especially in debugging
         return f'<Person : {self.title} , {self.description}> is it completed yet? {self.completed}'
 
+now = datetime.now()
+
+new_items = todo(title="Go to shop some snacks",description="Move a little bit to kin Marche and buy something",date=now.strftime("%d/%m/%Y %H:%M:%S"))
+db.session.add(new_items)
+db.session.commit()
 
 @app.route("/")
 def index():
-    return render_template("index.html",data=todo.query.all())
+    return render_template("index.html",data={
+            "items":todo.query.all(),
+            "url_save":url_for(save_to_do),
+            "url_get_task":url_for(get_to_do),
+            "url_delete_task":url_for(delete_to_do),
+            "url_mark_complete":url_for(make_to_do_complete)
+        }
+    )
 
 @app.route("/get_tasks/")
 def get_to_do():
