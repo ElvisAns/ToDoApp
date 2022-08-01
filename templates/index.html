@@ -51,12 +51,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                        {% if data is defined and data|length %}
+                        {% if data %}
                         {% for item in data%}
                           <tr>
                             <th scope="row">{{ item.id }}</th>
                             <td><h6 class="text-primary">{{ item.title }}</h6><p>{{ item.description }}</p></td>
-                            <td>{{ item.completed }}</td>
+                            <td>
+                                {% if item.completed == True %}
+                                    <span class="text-success">Yes</span>
+                                {% else %}
+                                    <span class="text-danger">No</span>
+                                {% endif %}
+                            </td>
                             <td>{{ item.date }}</td>
                             <td>
                                 <div class="row row-cols-lg-auto justify-content-center align-items-start">
