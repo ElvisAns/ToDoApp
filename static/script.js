@@ -1,6 +1,6 @@
 function saveToDo(e){
     e.preventDefault()
-    let desc = document.getElementsById("task_desc").value
+    let desc = document.getElementById("task_desc").value
     let title = document.getElementById("task_title").value
 
     if(desc.length<5 || title.length<5){
@@ -9,7 +9,7 @@ function saveToDo(e){
     }
 
     fetch("/save_to_do/",{
-        method:POST,
+        method: "POST",
         body: JSON.stringify({
                 'title' : title,
                 'description':desc
