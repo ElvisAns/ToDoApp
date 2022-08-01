@@ -1,3 +1,4 @@
+from crypt import methods
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
 from flask import Flask, redirect, render_template, url_for
@@ -45,18 +46,18 @@ def index():
             url_mark_complete=url_for("make_to_do_complete")
     )
 
-@app.route("/get_tasks/")
+@app.route("/get_tasks/", methods=['GET'])
 def get_to_do():
     pass
 
-@app.route("/save_to_do/")
+@app.route("/save_to_do/", methods=['POST'])
 def save_to_do():
     pass
 
-@app.route("/delete_task/")
-def delete_to_do():
+@app.route("/delete_task/<int: id>",methods=['GET'])
+def delete_to_do(id):
     pass
 
-@app.route("/make_complete/")
-def make_to_do_complete():
+@app.route("/make_complete/<int: id>/",methods=['GET'])
+def make_to_do_complete(id):
     pass
