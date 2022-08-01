@@ -20,13 +20,13 @@
                       <form id="formSave" class="row row-cols-lg-auto g-3 justify-content-center align-items-start mb-4 pb-2">
                         <div class="col-12">
                           <div class="form-outline">
-                            <input type="text" autocomplete="false" name="title" class="form-control" />
+                            <input type="text" id="task_title" autocomplete="false" name="title" required minlength="5" class="form-control" />
                             <label class="form-label" for="form1">Enter a task  title here</label>
                           </div>
                         </div>
                         <div class="col-12">
                             <div class="form-outline">
-                              <input type="text" autocomplete="false" name="description" class="form-control" />
+                              <input type="text" id="task_desc" autocomplete="false" name="description" required minlength="5" class="form-control" />
                               <label class="form-label" for="form1">Enter a task description</label>
                             </div>
                           </div>
