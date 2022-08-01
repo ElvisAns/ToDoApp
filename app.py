@@ -25,7 +25,7 @@ class todo(db.Model):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html",data=todo.query.all())
 
 @app.route("/get_tasks/")
 def get_to_do():
