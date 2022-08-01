@@ -1,3 +1,4 @@
+from flask_bootstrap import Bootstrap5
 from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -7,6 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI']='postgresql://root:root@localhost:5432/tes
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+bootstrap = Bootstrap5(app)
 
 migrate = Migrate(app, db)
 
