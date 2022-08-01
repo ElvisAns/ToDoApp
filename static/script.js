@@ -45,3 +45,18 @@ function deleteItem(itemID){
         alert("Une erreur s'est produite lors de la suppression")
     })
 }
+
+function makeAsDone(itemID){
+    fetch(`/make_complete/${itemID}`).then(resp=>resp.json())
+    .then(jsonResponse=>{
+        if(jsonResponse.status=="ok"){
+            alert(`La tache a ete marqued complete avec success`)
+            window.location.assign("/")
+        }
+        else
+            throw "error"
+    })
+    .catch(function(){
+        alert("Une erreur s'est produite lors de la mis a jour de la tache")
+    })
+}
