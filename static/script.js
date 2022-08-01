@@ -21,6 +21,7 @@ function saveToDo(e){
     })
     .then(response => response.json())
     .then(jsonResponse => {
+        alert(`La tache ${jsonResponse.title} a ete enregistre avec success`)
         window.location.assign("/")
     })
     .catch(function(){
