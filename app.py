@@ -1,9 +1,9 @@
-from crypt import methods
 from datetime import datetime
 from flask_bootstrap import Bootstrap5
 from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from crypt import methods
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://root:root@localhost:5432/testdb'
@@ -41,23 +41,21 @@ def index():
     return render_template("index.html",
             data=todo.query.all(),
             url_save=url_for("save_to_do"),
-            url_get_task=url_for("get_to_do"),
-            url_delete_task=url_for("delete_to_do"),
-            url_mark_complete=url_for("make_to_do_complete")
+            url_get_task=url_for("get_to_do")
     )
 
-@app.route("/get_tasks/", methods=['GET'])
+@app.route("/get_tasks/")
 def get_to_do():
-    pass
+    return "hello"
 
 @app.route("/save_to_do/", methods=['POST'])
 def save_to_do():
-    pass
+    return "hello"
 
-@app.route("/delete_task/<int: id>",methods=['GET'])
+@app.route("/delete_task/<int:id>/")
 def delete_to_do(id):
-    pass
+    return "hello"
 
-@app.route("/make_complete/<int: id>/",methods=['GET'])
+@app.route("/make_complete/<int:id>/")
 def make_to_do_complete(id):
-    pass
+    return "hello"

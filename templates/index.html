@@ -66,8 +66,8 @@
                             <td>{{ item.date }}</td>
                             <td>
                                 <div class="row row-cols-lg-auto justify-content-center align-items-start">
-                                    <button onclick="deleteItem({{ item.id }})" type="submit" class="btn btn-danger m-1">Delete</button>
-                                    <button onclick="makeAsDone({{ item.id }})" type="submit" class="btn btn-success m-1">Finished</button>
+                                    <button onclick="deleteItem('{{item.id }}')" type="submit" class="btn btn-danger m-1">Delete</button>
+                                    <button onclick="makeAsDone('{{ item.id }}')" type="submit" class="btn btn-success m-1">Finished</button>
                                 </div>
                             </td>
                           </tr>
