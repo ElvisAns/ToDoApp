@@ -1,4 +1,5 @@
 from datetime import datetime
+from distutils.log import error
 import sys
 from flask_bootstrap import Bootstrap5
 from flask import Flask, redirect, render_template, url_for,abort,request,jsonify
@@ -66,19 +67,61 @@ def save_to_do():
     except:
         error = True
         db.session.rollback()
-        print(sys.exc_info())
+        #print(sys.exc_info())
     finally:
         db.session.close()
     if error:
         db.session.rollback()
-        print(sys.exc_info())
+        return ""
+        #print(sys.exc_info())
     else:
         return jsonify(body)
 
 @app.route("/delete_task/<int:id>/")
 def delete_to_do(id):
-    return "hello"
+    res= {}
+    error = False
+    try:
+        task = todo.query.get(id)
+        db.session.delete(task)
+        db.session.commit()
+    except:
+        error = True
+        db.session.rollback()
+        print(sys.exc_info())
+    finally:
+        db.session.rollback()
+    if error:
+        db.session.close()
+        res['status'] = "bad"
+        #print(sys.exc_info())
+        return ""
+    else:
+        res['status'] = "ok"
+    
+    return jsonify(res)
 
 @app.route("/make_complete/<int:id>/")
 def make_to_do_complete(id):
-    return "hello"
+    res= {}
+    error = False
+    try:
+        task = todo.query.get(id)
+        task.completed=True
+        db.session.add(task)
+        db.session.commit()
+    except:
+        error = True
+        db.session.rollback()
+        print(sys.exc_info())
+    finally:
+        db.session.rollback()
+    if error:
+        db.session.close()
+        res['status'] = "bad"
+        #print(sys.exc_info())
+        return ""
+    else:
+        res['status'] = "ok"
+    
+    return jsonify(res)
