@@ -21,6 +21,22 @@ function saveToDo(e){
     })
     .then(response => response.json())
     .then(jsonResponse => {
+        const tr = document.createElement("tr")
+        tr.setAttribute("id",`itemno${ jsonResponse.id }`)
+        tr.innerHTML = `
+        <td>${jsonResponse.id}</td>
+        <td><h6 class="text-primary">{${ jsonResponse.title }</h6><p>${jsonResponse.description}</p></td>
+        <td>
+            <span class="text-danger">No</span>
+        </td>
+        <td>${ jsonResponse.date }</td>
+        <td>
+            <div class="row row-cols-lg-auto justify-content-center align-items-start">
+                <button onclick="deleteItem('${jsonResponse.id }')" type="submit" class="btn btn-danger m-1">Delete</button>
+                <button onclick="makeAsDone('${ jsonResponse.id }')" type="submit" class="btn btn-success m-1">Finished</button>
+            </div>
+        </td>
+        `
         alert(`La tache ${jsonResponse.title} a ete enregistre avec success`)
         //window.location.assign("/")
     })
