@@ -60,10 +60,12 @@ def save_to_do():
         new_item = todo(title=datas['title'],description=datas['description'],date=d)
         db.session.add(new_item)
         db.session.commit()
-        body['title'] = datas['title']
-        body['description'] = datas['description']
-        body['date'] = d
-        body['completed'] = False
+        #Instead of hardCode the response, our object new_item contain the table instance for the newly created item
+        body['title'] = new_item.title
+        body['description'] = new_item.description
+        body['date'] = new_item.date
+        body['id'] = new_item.id
+        body['completed'] = new_item.completed
     except:
         error = True
         db.session.rollback()
