@@ -22,7 +22,7 @@ function saveToDo(e){
     .then(response => response.json())
     .then(jsonResponse => {
         alert(`La tache ${jsonResponse.title} a ete enregistre avec success`)
-        window.location.assign("/")
+        //window.location.assign("/")
     })
     .catch(function(){
         alert("Une erreur s'est produite lors de l'enregistrement")
