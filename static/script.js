@@ -25,7 +25,7 @@ function saveToDo(e){
         tr.setAttribute("id",`itemno${ jsonResponse.id }`)
         tr.innerHTML = `
         <td>${jsonResponse.id}</td>
-        <td><h6 class="text-primary">{${ jsonResponse.title }</h6><p>${jsonResponse.description}</p></td>
+        <td><h6 class="text-primary">${ jsonResponse.title }</h6><p>${jsonResponse.description}</p></td>
         <td>
             <span class="text-danger">No</span>
         </td>
@@ -36,7 +36,9 @@ function saveToDo(e){
                 <button onclick="makeAsDone('${ jsonResponse.id }')" type="submit" class="btn btn-success m-1">Finished</button>
             </div>
         </td>
-        `
+        `;
+        document.getElementById("todos").appendChild(tr)
+
         alert(`La tache ${jsonResponse.title} a ete enregistre avec success`)
         //window.location.assign("/")
     })
