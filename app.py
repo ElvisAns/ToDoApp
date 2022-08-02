@@ -41,7 +41,7 @@ finally:
 @app.route("/")
 def index():
     return render_template("index.html",
-            data=todo.query.all(),
+            data=todo.query.order_by("id").all(),
             url_save=url_for("save_to_do"),
             url_get_task=url_for("get_to_do")
     )
