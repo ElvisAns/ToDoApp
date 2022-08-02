@@ -39,6 +39,7 @@
                       <table class="table mb-4">
                         <thead>
                           <tr>
+                            <th scope="col">No</th>
                             <th scope="col">Task</th>
                             <th scope="col">Completed</th>
                             <th scope="col">Added On</th>
@@ -48,7 +49,8 @@
                         <tbody>
                         {% if data %}
                         {% for item in data%}
-                          <tr>
+                          <tr id="itemno{{ item.id }}">
+                            <td>{{ item.id }}</td>
                             <td><h6 class="text-primary">{{ item.title }}</h6><p>{{ item.description }}</p></td>
                             <td>
                                 {% if item.completed == True %}
