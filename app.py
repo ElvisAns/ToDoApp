@@ -50,7 +50,7 @@ def index():
 def get_to_do():
     pass
 
-@app.route("/save_to_do/", methods=['POST'])
+@app.route("/todo/save_to_do/", methods=['POST'])
 def save_to_do():
     error = False
     body = {}
@@ -77,7 +77,7 @@ def save_to_do():
     else:
         return jsonify(body)
 
-@app.route("/delete_task/<int:id>/")
+@app.route("/todo/delete_task/<int:id>/")
 def delete_to_do(id):
     res= {}
     error = False
@@ -101,7 +101,7 @@ def delete_to_do(id):
     
     return jsonify(res)
 
-@app.route("/make_complete/<int:id>/")
+@app.route("/todo/make_complete/<int:id>/")
 def make_to_do_complete(id):
     res= {}
     error = False
