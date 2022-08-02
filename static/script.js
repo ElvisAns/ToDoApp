@@ -8,7 +8,7 @@ function saveToDo(e){
         return
     }
 
-    fetch("/save_to_do/",{
+    fetch("/todo/save_to_do/",{
         method: "POST",
         body: JSON.stringify({
                 'title' : title,
@@ -32,7 +32,7 @@ function saveToDo(e){
 document.getElementById("formSave").addEventListener("submit",saveToDo)
 
 function deleteItem(itemID){
-    fetch(`/delete_task/${itemID}`).then(resp=>resp.json())
+    fetch(`/todo/delete_task/${itemID}`).then(resp=>resp.json())
     .then(jsonResponse=>{
         if(jsonResponse.status=="ok"){
             alert(`La tache a ete supprime avec success`)
@@ -47,7 +47,7 @@ function deleteItem(itemID){
 }
 
 function makeAsDone(itemID){
-    fetch(`/make_complete/${itemID}`).then(resp=>resp.json())
+    fetch(`/todo/make_complete/${itemID}`).then(resp=>resp.json())
     .then(jsonResponse=>{
         if(jsonResponse.status=="ok"){
             alert(`La tache a ete marqued complete avec success`)
