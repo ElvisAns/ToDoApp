@@ -38,9 +38,8 @@ function saveToDo(e){
         </td>
         `;
         document.getElementById("todos").appendChild(tr)
-
         alert(`La tache ${jsonResponse.title} a ete enregistre avec success`)
-        //window.location.assign("/")
+        //window.location.assign("/") //no reload needed again
     })
     .catch(function(){
         alert("Une erreur s'est produite lors de l'enregistrement")
@@ -53,8 +52,10 @@ function deleteItem(itemID){
     fetch(`/todo/delete_task/${itemID}`).then(resp=>resp.json())
     .then(jsonResponse=>{
         if(jsonResponse.status=="ok"){
+            el = document.getElementById(`itemno${itemID}`)
+            el.parentElement.removeChild(el)
             alert(`La tache a ete supprime avec success`)
-            window.location.assign("/")
+            //window.location.assign("/")
         }
         else
             throw "error"
@@ -68,8 +69,16 @@ function makeAsDone(itemID){
     fetch(`/todo/make_complete/${itemID}`).then(resp=>resp.json())
     .then(jsonResponse=>{
         if(jsonResponse.status=="ok"){
+            el = document.getElementById(`itemno${itemID}`)
+            console.log(el)
+            span = el.querySelector("td:nth-child(3) > span")
+            span.innerHTML = "Yes";
+            span.classList.remove("text-danger")
+            span.classList.add("text-success")
+            button = el.querySelector("td:nth-child(5) > div > button.btn.btn-success.m-1")
+            button.style.display= "none"
             alert(`La tache a ete marqued complete avec success`)
-            window.location.assign("/")
+            //window.location.assign("/")
         }
         else
             throw "error"
