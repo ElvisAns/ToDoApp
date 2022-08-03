@@ -24,9 +24,12 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.add_column('todo', sa.Column('todolist_id', sa.Integer(), nullable=False))
+    op.add_column('todo', sa.Column('todolist_id', sa.Integer(), nullable=True))
     op.create_foreign_key(None, 'todo', 'todolist', ['todolist_id'], ['id'])
     # ### end Alembic commands ###
+    op.execute("INSERT INTO todolist(id,name) VALUES(1,'Uncategorized')")
+    op.execute("UPDATE todo set todolist_id = 1 WHERE todolist_id is NULL")
+    op.alter_column('todo','todolist_id',nullable=False)
 
 
 def downgrade():
