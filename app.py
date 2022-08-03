@@ -24,7 +24,7 @@ class todo(db.Model):
     description = db.Column(db.String(),nullable=False)
     completed = db.Column(db.Boolean,default=False)
     date = db.Column(db.DateTime,nullable=False)
-    todolist_id = db.Column(db.Integer,db.ForeignKey('Todolist.id'),nullable=False)
+    todolist_id = db.Column(db.Integer,db.ForeignKey('todolist.id'),nullable=False)
     def __repr__(self): #will handle printing more especially in debugging
        return f'<Person : {self.title} , {self.description}> is it completed yet? {self.completed}'
 
