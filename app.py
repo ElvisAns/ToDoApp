@@ -1,5 +1,6 @@
 from datetime import datetime
 from distutils.log import error
+from enum import unique
 import sys
 from flask_bootstrap import Bootstrap5
 from flask import Flask, redirect, render_template, url_for,abort,request,jsonify
@@ -23,8 +24,17 @@ class todo(db.Model):
     description = db.Column(db.String(),nullable=False)
     completed = db.Column(db.Boolean,default=False)
     date = db.Column(db.DateTime,nullable=False)
+    todolist_id = db.Column(db.Integer,db.ForeignKey('Todolist.id'))
     def __repr__(self): #will handle printing more especially in debugging
        return f'<Person : {self.title} , {self.description}> is it completed yet? {self.completed}'
+
+class Todolist(db.Model):
+    __tablename__ = 'todolist'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50),nullable=False,unique=True)
+    todos = db.relationship('todo', backref="list",lazy=True)
+    def __repr__(self):
+        return f'<TodoList : {self.name}>'
 
 now = datetime.now()
 try:
